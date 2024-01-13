@@ -15,6 +15,24 @@ pub fn main() !void {
     try stdout.print("Run `zig build test` to run the tests.\n", .{});
 
     try bw.flush(); // don't forget to flush!
+
+    zigzag();
+}
+
+fn zigzag() {
+    const stdout = std.io.getStdOut().writer();
+    var i: usize = 1;
+    while (i <= 16) : (i += 1) {
+        if (i % 15 == 0) {
+            try stdout.writeAll("ZiggZagg\n");
+        } else if (i % 3 == 0) {
+            try stdout.writeAll("Zigg\n");
+        } else if (i % 5 == 0) {
+            try stdout.writeAll("Zagg\n");
+        } else {
+            try stdout.print("{d}\n", .{i});
+        }
+    }
 }
 
 test "simple test" {
